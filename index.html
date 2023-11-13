@@ -1,28 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Servicios</title>
     <link rel="stylesheet" href="styles/style.css">
+    <title>Simulador de Costos</title>
 </head>
 <body>
-    <h1>Servicios y Costos</h1>
-
-    <label for="diseñoPost">Diseño de Post: $35</label>
-    <input type="checkbox" id="diseñoPost">
-
-    <label for="diseñoWeb">Diseño de Sitio Web: $399</label>
-    <input type="checkbox" id="diseñoWeb">
-
-    <label for="manejoRedes">Manejo de Redes Sociales: $100</label>
-    <input type="checkbox" id="manejoRedes">
-
-    <button onclick="calcularCostoTotal()">Calcular Costo Total</button>
-
-    <p id="resultado"></p>
-    <p id="resultadoAdicional"></p>
-
+    <div class="container">
+        <h1>Simulador de Costos</h1>
+        <label for="diseñoPost">Diseño de Post</label>
+        <input type="checkbox" id="diseñoPost">
+        <label for="diseñoWeb">Diseño Web</label>
+        <input type="checkbox" id="diseñoWeb">
+        <label for="manejoRedes">Manejo de Redes</label>
+        <input type="checkbox" id="manejoRedes">
+        <button onclick="calcularCostoTotal()">Calcular Costo</button>
+        <div id="resultado"></div>
+        <div id="resultadoAdicional"></div>
+    </div>
     <script src="js/main.js"></script>
 </body>
 </html>
