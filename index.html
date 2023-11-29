@@ -1,24 +1,138 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/style.css">
-    <title>Simulador de Costos</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles/style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  />
+  <title>Brain of Coconuts - Servicios de Diseño</title>
 </head>
+
 <body>
-    <div class="container">
-        <h1>Simulador de Costos</h1>
-        <label for="diseñoPost">Diseño de Post</label>
-        <input type="checkbox" id="diseñoPost">
-        <label for="diseñoWeb">Diseño Web</label>
-        <input type="checkbox" id="diseñoWeb">
-        <label for="manejoRedes">Manejo de Redes</label>
-        <input type="checkbox" id="manejoRedes">
-        <button onclick="calcularCostoTotal()">Calcular Costo</button>
-        <div id="resultado"></div>
-        <div id="resultadoAdicional"></div>
-    </div>
-    <script src="js/main.js"></script>
+  <div class="container">
+    <header>
+      <h1>Brain of Coconuts</h1>
+      <p class="subtitle">Tu aliado en diseño creativo para emprendedores</p>
+    </header>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html"><img src="img/huevon.png" alt="imagen de navbar" width="90" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#nosotros">Nosotros</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#trabajos">Trabajos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#carrito">Carrito</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section id="nosotros">
+      <h2>Nosotros</h2>
+      <p>
+        Bienvenido a Brain of Coconuts, tu aliado creativo en el mundo del
+        diseño. Somos un equipo apasionado de diseñadores gráficos y
+        especialistas en marketing digital dedicados a impulsar la identidad
+        visual de emprendedores como tú.
+      </p>
+      <h3>Misión</h3>
+      <p>
+        Nuestra misión es proporcionarte soluciones de diseño innovadoras que
+        destaquen tu marca en el mercado. Trabajamos contigo para crear
+        experiencias visuales impactantes y efectivas.
+      </p>
+      <h3>Visión</h3>
+      <p>
+        Queremos ser reconocidos como el socio preferido para emprendedores
+        que buscan transformar sus ideas en diseños extraordinarios. Nos
+        esforzamos por superar las expectativas y ser líderes en creatividad y
+        profesionalismo.
+      </p>
+    </section>
+
+    <section id="trabajos">
+      <h2>Algunos de nuestros trabajos</h2>
+      <h3>Grupo Smile Up</h3>
+      <img flex src="img/06 de Noviembre ubicacioninstagramportada3.png" class="img-fluid" alt="..." width="350">
+      <img flex src="img/06 de Noviembre ubicacioninstagramportada2.png" class="img-fluid" alt="..." width="350">
+      <img flex src="img/06 de Noviembre ubicacioninstagramportada1.png" class="img-fluid" alt="..." width="350">
+
+      <h3>FDM</h3>
+      <img flex src="img/Cuadrado1 copia 3.png" class="img-fluid" alt="..." width="350">
+      <img flex src="img/Cuadrado1 copia 6.png" class="img-fluid" alt="..." width="350">
+      <img flex src="img/Cuadrado1 copia 7.png" class="img-fluid" alt="..." width="350">
+
+      <h3>Sur Inmuebles</h3>
+      <img flex src="img/08 DE nOVIEMBREpreventa2.png" class="img-fluid" alt="..." width="350">
+      <img flex src="img/09 de Noviembrepreventa3.png" class="img-fluid" alt="..." width="350">
+      <img flex src="img/17 de noviembrecentajas fotos1.png" class="img-fluid" alt="..." width="350">
+
+
+      <section id="carrito">
+        <h2>Carrito de Compras</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <p id="contadorCarrito">Items en el carrito: 0</p>
+            <div id="listaCarrito" class="carrito"></div>
+          </div>
+          <div class="col-md-6">
+            <form>
+              <div class="mb-3">
+                <label for="diseñoPost" class="form-label">Diseño de Post</label>
+                <input type="checkbox" id="diseñoPost" class="form-check-input" />
+              </div>
+              <div class="mb-3">
+                <label for="diseñoWeb" class="form-label">Diseño Web</label>
+                <input type="checkbox" id="diseñoWeb" class="form-check-input" />
+              </div>
+              <div class="mb-3">
+                <label for="manejoRedes" class="form-label">Manejo de Redes</label>
+                <input type="checkbox" id="manejoRedes" class="form-check-input" />
+              </div>
+              <button type="button" onclick="calcularCostoTotal()" class="btn btn-primary">
+                Agregar al Carrito
+              </button>
+              <button type="button" onclick="resetearCarrito()" class="btn btn-danger">
+                Resetear Carrito
+              </button>
+            </form>
+          </div>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Servicio</th>
+              <th scope="col">Precio</th>
+            </tr>
+          </thead>
+          <tbody id="tablaCarrito"></tbody>
+        </table>
+        <p id="total"></p>
+      </section>
+
+      <button id="btnCarrito" onclick="mostrarCarrito()" class="btn btn-info">
+        Ver Carrito de Compras
+    </button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <script src="js/main.js"></script>
 </body>
+
 </html>

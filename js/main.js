@@ -1,6 +1,3 @@
-// Requerimiento 1: Estructura HTML del proyecto.
-// Requerimiento 2: Variables de JS necesarias.
-// Requerimiento 4: Objetos de JS.
 const servicios = {
     diseñoPost: {
         nombre: "Diseño de Post",
@@ -16,62 +13,69 @@ const servicios = {
     }
 };
 
-// Requerimiento adicional: Arrays y Métodos de búsqueda y filtrado sobre el Array.
-const serviciosSeleccionados = [];
+let serviciosSeleccionados = [];
 
-// Requerimiento 3: Funciones esenciales del proceso a simular.
-// Requerimiento 5: Salida de resultados por console.log.
 function calcularCostoTotal() {
+    const totalElement = document.getElementById("total");
+    totalElement.textContent = "";
+
     let costoTotal = 0;
 
     const checkboxDiseñoPost = document.getElementById("diseñoPost");
     if (checkboxDiseñoPost.checked) {
         costoTotal += servicios.diseñoPost.precio;
-        serviciosSeleccionados.push(servicios.diseñoPost.nombre);
+        serviciosSeleccionados.push({ nombre: servicios.diseñoPost.nombre, precio: servicios.diseñoPost.precio });
     }
 
     const checkboxDiseñoWeb = document.getElementById("diseñoWeb");
     if (checkboxDiseñoWeb.checked) {
         costoTotal += servicios.diseñoWeb.precio;
-        serviciosSeleccionados.push(servicios.diseñoWeb.nombre);
+        serviciosSeleccionados.push({ nombre: servicios.diseñoWeb.nombre, precio: servicios.diseñoWeb.precio });
     }
 
     const checkboxManejoRedes = document.getElementById("manejoRedes");
     if (checkboxManejoRedes.checked) {
         costoTotal += servicios.manejoRedes.precio;
-        serviciosSeleccionados.push(servicios.manejoRedes.nombre);
+        serviciosSeleccionados.push({ nombre: servicios.manejoRedes.nombre, precio: servicios.manejoRedes.precio });
     }
 
-    // Requerimiento adicional: Console.log para mostrar servicios seleccionados.
-    console.log("Servicios seleccionados:", serviciosSeleccionados);
-
     if (costoTotal > 0) {
-        if (costoTotal >= 400) {
-            // Requerimiento 6: Descuentos adicionales y Salida en HTML.
-            const resultadoAdicionalElement = document.getElementById("resultadoAdicional");
-            resultadoAdicionalElement.textContent = `Costo total con descuento adicional: $${calcularDescuentoAdicional(costoTotal)}`;
-        }
-
-        // Requerimiento 5: Salida de resultados por console.log.
-        console.log("Costo total:", costoTotal);
-
-        // Requerimiento 5: Salida de resultados en HTML.
-        const resultadoElement = document.getElementById("resultado");
-        resultadoElement.textContent = `Costo total: $${costoTotal}`;
+        mostrarCarrito();
+        mostrarTotal(costoTotal);
+        actualizarContadorCarrito();
     } else {
-        // Requerimiento 5: Salida de resultados en HTML.
+        resetearCarrito();
         const resultadoElement = document.getElementById("resultado");
         resultadoElement.textContent = "No has seleccionado ningún servicio.";
     }
 }
 
-// Requerimiento 7: Funciones y/o métodos para realizar operaciones.
-function calcularDescuentoAdicional(costoTotal) {
-    if (costoTotal >= 500) {
-        return costoTotal - 50;
-    } else if (costoTotal >= 400) {
-        return costoTotal - 30;
-    } else {
-        return costoTotal;
-    }
+function mostrarCarrito() {
+    const tablaCarrito = document.getElementById("tablaCarrito");
+    tablaCarrito.innerHTML = "";
+
+    serviciosSeleccionados.forEach(servicio => {
+        const row = tablaCarrito.insertRow();
+        const cellNombre = row.insertCell(0);
+        const cellPrecio = row.insertCell(1);
+
+        cellNombre.textContent = servicio.nombre;
+        cellPrecio.textContent = `$${servicio.precio}`;
+    });
+}
+
+function mostrarTotal(total) {
+    const totalElement = document.getElementById("total");
+    totalElement.textContent = `Total a Pagar: $${total}`;
+}
+
+function actualizarContadorCarrito() {
+    const contadorCarritoElement = document.getElementById("contadorCarrito");
+    contadorCarritoElement.textContent = `Items en el carrito: ${serviciosSeleccionados.length}`;
+}
+
+function resetearCarrito() {
+    serviciosSeleccionados = [];
+    const tablaCarrito = document.getElementById("tablaCarrito");
+    tablaCarrito.innerHTML = "";
 }
