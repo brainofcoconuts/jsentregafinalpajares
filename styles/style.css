@@ -1,75 +1,176 @@
 body {
-    background-color: #e0f7fa; /* Cyan lighten-5 */
-    color: #01579b; /* Blue darken-4 */
-}
-
-.container {
-    background-color: #ffffff; /* White */
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to bottom, #ffffff, #e0e0e0, #a8d5ff, #f9a6ff);
+  color: #fcfcfc;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: color 0.3s;
 }
 
 header {
-    text-align: center;
+  text-align: center;
+  padding: 50px 0;
 }
 
-nav {
-    margin-top: 20px;
+.navbar-nav .nav-link:hover {
+  color: #1a4196;
+  transition: color 0.3s;
+}
+h1, h2, h3 {
+  color: #04d9ff;
+  font-weight: bold;
+  transition: color 0.3s, font-size 0.3s, background-image 0.3s;
+  background-image: linear-gradient(to right, #ff00cc, #3333cc);
+  background-clip: text;
+  color: transparent;
+}
+.subtitle {
+  font-size: 1.2em;
+  color: #808080;
+  margin-top: 10px;
 }
 
-.nav {
-    list-style: none;
-    padding: 0;
-    background-color: #0288d1; /* Light Blue darken-4 */
-    border-radius: 5px;
+.mission-vision-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
 }
 
-.nav-item {
-    display: inline-block;
-    margin-right: 10px;
+.mission, .vision {
+  display: flex;
+  align-items: center;
 }
 
-.nav-link {
-    display: block;
-    padding: 10px;
-    color: #ffffff; /* White */
-    text-decoration: none;
+.mission img, .vision img {
+  max-width: 200px;
+  margin-right: 20px;
 }
 
-.nav-link:hover {
-    background-color: #01579b; /* Blue darken-4 */
+.mission .text, .vision .text {
+  max-width: 400px;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.navbar {
+  background-color: #161616;
+}
+
+.navbar-nav .nav-link {
+  color: #04d9ff;
+  transition: color 0.3s; /* Transición suave de color de enlace */
+}
+
+.navbar-nav .nav-link.active {
+  color: #5af158;
 }
 
 section {
-    margin-top: 20px;
+  border-bottom: 1px solid #404040;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
-.carrito {
-    border: 1px solid #01579b; /* Blue darken-4 */
-    padding: 10px;
-    border-radius: 5px;
+.table {
+  color: #04d9ff;
 }
 
-.btn-info {
-    background-color: #01579b; /* Blue darken-4 */
-    color: #ffffff; /* White */
-    border: none;
+.btn-primary {
+  background-color: #6a0572;
+  border-color: #6a0572;
+  font-weight: bold; /* Aumento de grosor */
+  transition: background-color 0.3s; /* Transición suave de color de botón */
 }
 
-.btn-info:hover {
-    background-color: #002f6c; /* Blue darken-3 */
-}
-
-.btn-primary,
 .btn-danger {
-    background-color: #0288d1; /* Light Blue darken-4 */
-    color: #ffffff; /* White */
-    border: none;
+  background-color: #ff0000;
+  border-color: #ff0000;
+  font-weight: bold;
+  transition: background-color 0.3s;
 }
 
-.btn-primary:hover,
-.btn-danger:hover {
-    background-color: #01579b; /* Blue darken-4 */
+.btn-primary:hover, .btn-danger:hover {
+  background-color: #4c045e;
+  border-color: #4c045e;
+}
+
+.form-check-input:checked {
+  background-color: #04d9ff;
+  border-color: #04d9ff;
+}
+
+.form-check-input:checked:hover {
+  background-color: #037db5;
+  border-color: #037db5;
+}
+
+.img-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.img-container img {
+  max-width: 45%;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  transition: transform 0.3s; /* Efecto de transición de imagen */
+}
+
+.img-container img:hover {
+  transform: scale(1.1); /* Efecto de escala al pasar el mouse */
+}
+
+footer {
+  background: linear-gradient(to bottom, #024788, #161616);
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+footer h4 {
+  color: #e5e913;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+footer p {
+  color: #fff;
+  font-weight: bold;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+footer a:hover {
+  text-decoration: underline;
+  color: #04d9ff;
+}
+
+footer i {
+  margin-right: 5px;
+}
+
+footer .col-md-4 {
+  margin-top: 10px;
+}
+
+footer i.fab,
+footer i.far,
+footer i.fas {
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+/* Efecto de cambio de color al pasar el mouse en la barra de navegación */
+.navbar-nav .nav-link:hover {
+  color: #1a4196;
 }

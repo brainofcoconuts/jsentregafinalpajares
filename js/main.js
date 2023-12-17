@@ -1,81 +1,104 @@
-const servicios = {
-    diseñoPost: {
-        nombre: "Diseño de Post",
-        precio: 35
-    },
-    diseñoWeb: {
-        nombre: "Diseño Web",
-        precio: 400
-    },
-    manejoRedes: {
-        nombre: "Manejo de Redes",
-        precio: 100
-    }
-};
+let carrito = [];
 
-let serviciosSeleccionados = [];
+// Función para agregar un servicio al carrito
+function agregarAlCarrito(servicio, descripcion, precio, cantidadInputId) {
+  const cantidad = parseInt(document.getElementById(cantidadInputId).value);
 
-function calcularCostoTotal() {
-    const totalElement = document.getElementById("total");
-    totalElement.textContent = "";
-
-    let costoTotal = 0;
-
-    const checkboxDiseñoPost = document.getElementById("diseñoPost");
-    if (checkboxDiseñoPost.checked) {
-        costoTotal += servicios.diseñoPost.precio;
-        serviciosSeleccionados.push({ nombre: servicios.diseñoPost.nombre, precio: servicios.diseñoPost.precio });
-    }
-
-    const checkboxDiseñoWeb = document.getElementById("diseñoWeb");
-    if (checkboxDiseñoWeb.checked) {
-        costoTotal += servicios.diseñoWeb.precio;
-        serviciosSeleccionados.push({ nombre: servicios.diseñoWeb.nombre, precio: servicios.diseñoWeb.precio });
-    }
-
-    const checkboxManejoRedes = document.getElementById("manejoRedes");
-    if (checkboxManejoRedes.checked) {
-        costoTotal += servicios.manejoRedes.precio;
-        serviciosSeleccionados.push({ nombre: servicios.manejoRedes.nombre, precio: servicios.manejoRedes.precio });
-    }
-
-    if (costoTotal > 0) {
-        mostrarCarrito();
-        mostrarTotal(costoTotal);
-        actualizarContadorCarrito();
-    } else {
-        resetearCarrito();
-        const resultadoElement = document.getElementById("resultado");
-        resultadoElement.textContent = "No has seleccionado ningún servicio.";
-    }
-}
-
-function mostrarCarrito() {
-    const tablaCarrito = document.getElementById("tablaCarrito");
-    tablaCarrito.innerHTML = "";
-
-    serviciosSeleccionados.forEach(servicio => {
-        const row = tablaCarrito.insertRow();
-        const cellNombre = row.insertCell(0);
-        const cellPrecio = row.insertCell(1);
-
-        cellNombre.textContent = servicio.nombre;
-        cellPrecio.textContent = `$${servicio.precio}`;
+  // Verificar si la cantidad es válida
+  if (isNaN(cantidad) || cantidad <= 0 || cantidad > 10) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Por favor, ingrese una cantidad válida (entre 1 y 10).',
     });
+    return;
+  }
+
+  const total = precio * cantidad;
+
+  // Crear objeto de servicio
+  const nuevoServicio = {
+    servicio: servicio,
+    descripcion: descripcion,
+    precio: precio,
+    cantidad: cantidad,
+    total: total.toFixed(2),
+  };
+
+  // Agregar al carrito
+  carrito.push(nuevoServicio);
+
+  // Actualizar la visualización del carrito
+  mostrarCarrito();
 }
 
-function mostrarTotal(total) {
-    const totalElement = document.getElementById("total");
-    totalElement.textContent = `Total a Pagar: $${total}`;
+// Función para mostrar el carrito en la página
+function mostrarCarrito() {
+  const listaCarrito = document.getElementById("listaCarrito");
+  const tablaCarrito = document.getElementById("tablaCarrito");
+  const totalElement = document.getElementById("total");
+
+  // Limpiar la lista y la tabla
+  listaCarrito.innerHTML = "";
+  tablaCarrito.innerHTML = "";
+
+  // Calcular el total del carrito
+  let totalCarrito = 0;
+
+  // Recorrer el carrito
+  carrito.forEach((item, index) => {
+    totalCarrito += parseFloat(item.total);
+
+    // Agregar elemento a la lista
+    const listItem = document.createElement("div");
+    listItem.innerHTML = `<p>${item.servicio} - Cantidad: ${item.cantidad} - Total: $${item.total}</p>`;
+    listaCarrito.appendChild(listItem);
+
+    // Agregar fila a la tabla
+    const row = tablaCarrito.insertRow();
+    row.innerHTML = `
+      <td>${item.servicio}</td>
+      <td>${item.cantidad}</td>
+      <td>$${item.precio.toFixed(2)}</td>
+      <td>$${item.total}</td>
+      <td><button class="btn btn-danger" onclick="quitarDelCarrito(${index})">Quitar</button></td>
+    `;
+  });
+
+  // Mostrar el total
+  totalElement.textContent = `Total: $${totalCarrito.toFixed(2)}`;
 }
 
-function actualizarContadorCarrito() {
-    const contadorCarritoElement = document.getElementById("contadorCarrito");
-    contadorCarritoElement.textContent = `Items en el carrito: ${serviciosSeleccionados.length}`;
+// Función para quitar un servicio del carrito
+function quitarDelCarrito(index) {
+  carrito.splice(index, 1);
+  mostrarCarrito();
 }
 
+// Función para resetear el carrito
 function resetearCarrito() {
-    serviciosSeleccionados = [];
-    const tablaCarrito = document.getElementById("tablaCarrito");
-    tablaCarrito.innerHTML = "";
+  carrito = [];
+  mostrarCarrito();
+}
+
+// Función para realizar la compra con SweetAlert
+function realizarCompra() {
+  // Verificar si el carrito está vacío
+  if (carrito.length === 0) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Por favor, selecciona al menos un servicio antes de realizar la compra.',
+    });
+    return;
+  }
+
+  Swal.fire({
+    icon: 'success',
+    title: 'Compra realizada',
+    text: 'Tu pedido ha sido enviado. Te contactaremos pronto.',
+  });
+
+  // Resetear el carrito después de la compra
+  resetearCarrito();
 }
